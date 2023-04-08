@@ -2,10 +2,13 @@
 const { response } = require('express');
 const EventoModel = require('../models/EventoModel');
 
-const getEvents = ( req, res = response ) => {
+const getEvents = async( req, res = response ) => {
+    const events = await EventoModel.find()
+                                    .populate('user', 'name');
+
     res.status(201).json({
         ok: true,
-        msg: 'getEvents'
+        msg: events
     });
 }
 
@@ -15,7 +18,7 @@ const createEvent = async( req, res = response ) => {
     try {
         event.user = req.uid
         const eventSave = await event.save();
-        
+
         res.status(201).json({
             ok: true,
             eventSave
