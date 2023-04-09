@@ -52,7 +52,7 @@ const loginUsuario = async(req, res = response) => {
         if( !usuario ) {
             return res.status(400).json({
                 ok: false,
-                msg: 'Ya existe un usuario con ese email.'
+                msg: 'No existe el email en nuestra base.'
             });
         }
 
